@@ -1,0 +1,24 @@
+Quick not for how to install NVIDIA drivers on Debian 9 Stretch Linux
+
+1. installing the firmware is to enable the contrib and non-free repositories in Debian.
+   Open up /etc/apt/sources.list in you favorite text editor as root, and add contrib non-free to the end of every line after main. Save and exit.
+   Now, run an system update.
+   # apt update && apt upgrade
+   Then, enable i386 by running
+   # dpkg --add-architecture i386
+
+2. Once you do have those repos enabled and your system updated, there are some packages that you need to install first.
+   # apt install firmware-linux build-essential gcc-multilib
+   # apt build-dep linux
+
+3. go to https://www.nvidia.com/Download/Find.aspx?lang=en-us, fill out the form there with your system information, and download your drivers.
+
+   The drivers will come in the form of a .run file. That file must be run as root with the X server disabled by running
+   # systemctl stop gdm3
+
+4. Once there, make sure it's executable.
+   # cd /home/user/Downloads
+   # chmod +x NVIDIA-Linux-x86_64-378.09.run
+
+   You can now run the installer.
+   # ./NVIDIA-Linux-x86_64-378.09.run
